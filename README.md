@@ -1,135 +1,174 @@
-# 🧪 QA Portfolio — Next.js Checkout Page
+<div align="center">
 
-A complete QA documentation portfolio for a **Next.js Checkout Page** supporting multiple payment gateways, regional routing, coupon logic, upsell flows, and 3D Secure authentication.
+# 🧪 Checkout Page — QA Portfolio
+
+**Manual QA documentation for a production Next.js checkout page**
+covering multi-gateway payments, 3D Secure, coupon logic, IP-based routing, currency handling, and cross-browser compatibility.
+
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+![Bugs](https://img.shields.io/badge/Bugs%20Reported-16-red)
+![Fixed](https://img.shields.io/badge/Fixed-9-brightgreen)
+![Test Cases](https://img.shields.io/badge/Test%20Cases-112-blue)
+![Environment](https://img.shields.io/badge/Environment-DEV-lightgrey)
+
+</div>
 
 ---
 
-## 📋 Project Overview
+## 📌 Project Overview
 
-| Detail | Info |
-|--------|------|
+| | |
+|---|---|
 | **Application** | Next.js Checkout Page (CWA) |
+| **Testing Rounds** | R1 — 28 May 2025 &nbsp;·&nbsp; R2 — 29 May 2025 |
 | **Environment** | DEV |
-| **Testing Rounds** | R1 (28 May 2025) · R2 (29 May 2025) |
 | **Payment Gateways** | Stripe · PayPal · Paystack |
-| **Total Bugs Reported** | 16 checkout + 14 3DS/challenge scenarios |
+| **QA Engineer** | Shahnawaz |
 
 ---
 
-## 🌍 Payment Gateway Routing Logic
+## 🌍 Payment Gateway Routing
+
+Gateway visibility is determined by the customer's IP region:
 
 | Region | Stripe | PayPal | Paystack |
-|--------|--------|--------|----------|
-| US (USD) | ✅ | ✅ | ❌ |
-| CA (CAD) | ❌ | ✅ | ❌ |
-| MXN / EUR | ✅ | ✅ | ❌ |
-| Africa | ✅ | ❌ | ✅ |
+|--------|:------:|:------:|:--------:|
+| 🇺🇸 US (USD) | ✅ | ✅ | ❌ |
+| 🇨🇦 CA (CAD) | ❌ | ✅ | ❌ |
+| 🇲🇽 MXN / 🇪🇺 EUR | ✅ | ✅ | ❌ |
+| 🌍 Africa | ✅ | ❌ | ✅ |
 
 ---
 
-## 🔑 Features Tested
+## 📁 Documentation
 
-- ✅ Payment gateway display by region
-- ✅ Stripe payment flows (success, decline, coupon sync, duplicate intent prevention)
-- ✅ PayPal subscription and CAD flows
-- ✅ Paystack (African region)
-- ✅ Coupon code application (homepage, checkout, multi-session isolation)
-- ✅ Upsell flows (Window Sticker, Vehicle History Report, Report+Sticker combo)
-- ✅ 3D Secure challenge flows (all Stripe test card scenarios)
-- ✅ CAPTCHA and PIN challenge simulations
-- ✅ Mobile 3DS challenge flows (OOB, OTP, Multi-select)
-- ✅ CAD currency display and pending order creation
-- ✅ Admin panel accuracy (gateway, currency, order status)
-- ✅ UI parity with V1 checkout (SH/Auction image, info icons, testimonials)
+| Document | Description |
+|----------|-------------|
+| [`BUG_REPORT.md`](./BUG_REPORT.md) | All 16 checkout bugs with R1 → R2 status, 3DS/CAPTCHA/Mobile findings, and Jam.dev links |
+| [`TEST_PLAN.md`](./TEST_PLAN.md) | Test scope, priorities, entry/exit criteria, tools, and risk assessment |
+| [`TEST_CASES.md`](./TEST_CASES.md) | 112 test cases across 14 modules with steps, expected results, and status |
+| [`QA_REPORT.md`](./QA_REPORT.md) | Executive summary, regression analysis, open issues, and release recommendation |
 
 ---
 
-## 📁 Documents
+## 📊 Results Summary
 
-| File | Description |
-|------|-------------|
-| [`BUG_REPORT.md`](./BUG_REPORT.md) | All 16 checkout bugs + 3DS/CAPTCHA/Mobile findings with R1→R2 status |
-| [`TEST_PLAN.md`](./TEST_PLAN.md) | Scope, priorities, entry/exit criteria, risk assessment |
-| [`TEST_CASES.md`](./TEST_CASES.md) | 47 test cases across 10 modules with expected results and status |
-| [`QA_REPORT.md`](./QA_REPORT.md) | Final QA report with executive summary, regression analysis, and release recommendation |
+### 🐛 Bug Tracking (R1 → R2)
 
----
+| Total | Fixed ✅ | Open ❌ |
+|-------|---------|--------|
+| 16 | 9 (56%) | 7 (44%) |
 
-## 📊 Results at a Glance
+### ✅ Test Execution
 
-### Checkout Bugs (R1 → R2)
+| Total | Passed | Failed | Pending |
+|-------|--------|--------|---------|
+| 112 | 25 | 11 | 79 |
 
-```
-Total Reported : 16
-Fixed (PASSED) : 9   ████████░░  56%
-Still Open     : 7   ██████░░░░  44%
-```
+### 🔐 3DS / Challenge Flows
 
-### Test Cases
-
-```
-Total    : 112
-Passed   : 25   ████░░░░░░░░░░░░░░░░  22%
-Failed   : 11   ██░░░░░░░░░░░░░░░░░░  10%
-Pending  : 79   ██████████████░░░░░░  70%
-```
-
-### 3DS / Challenge Flows
-
-```
-Mobile 3DS (6/6) : ✅ All Passed
-CAPTCHA/PIN (2/3): ✅ 2 Passed, 1 Not Recorded
-Standard 3DS     : ⚠️  2 Passed, 2 Failed, 1 Partial
-```
+| Category | Result |
+|----------|--------|
+| Mobile 3DS (OOB, OTP, Multi-select) | ✅ 6/6 Passed |
+| CAPTCHA / PIN Challenges | ✅ 2/3 Passed |
+| Standard 3DS Scenarios | ⚠️ 2 Passed · 2 Failed · 1 Partial |
 
 ---
 
-## 🐛 Critical Open Issues
+## 🔍 What Was Tested
+
+<details>
+<summary><strong>Payment Flows</strong></summary>
+
+- Stripe: success, decline, coupon sync, duplicate payment intent prevention
+- PayPal: subscription, CAD flow, failover logic
+- Paystack: African region routing
+- Gateway display rules enforced by IP detection
+
+</details>
+
+<details>
+<summary><strong>Coupon Logic</strong></summary>
+
+- Coupon applied at homepage vs checkout page
+- Previous coupon vs new coupon priority
+- Cookie-based persistence (refresh, post-payment, multi-user)
+- Session isolation (incognito, logout, multi-session)
+- Edge cases: 100% discount, race conditions, wrong product type
+
+</details>
+
+<details>
+<summary><strong>Multi-IP & Currency Handling</strong></summary>
+
+- IP-based gateway routing for all 5 regions
+- IP switch mid-session — gateway and currency must NOT change
+- Stripe 0-decimal currencies (JPY, KRW) — integer amount validation
+- Stripe 2-decimal currencies (USD, EUR) — cent value validation
+- Negative cases: double conversion, unsupported currency fallback
+
+</details>
+
+<details>
+<summary><strong>3D Secure & Authentication</strong></summary>
+
+- All Stripe 3DS test card scenarios
+- CAPTCHA and online/offline PIN simulations
+- Mobile challenge flows: OOB, OTP, Multi-select
+
+</details>
+
+<details>
+<summary><strong>UI / UX & Cross-Browser</strong></summary>
+
+- Responsive layout: 375px (mobile) and 768px (tablet)
+- Keyboard accessibility, input types, error messaging
+- Chrome · Firefox · Safari · Edge (desktop + mobile)
+- Zero console errors across all browsers
+
+</details>
+
+---
+
+## 🚨 Critical Open Issues
 
 | Bug ID | Issue | Impact |
 |--------|-------|--------|
-| CHECK#006 | Report+Sticker upsell missing from Register API | Product not delivered |
-| CHECK#007 | PayPal option missing on PayPal tab for VHR | Blocks payment |
-| CHECK#010 | Duplicate Stripe payment intents from homepage coupon | Potential double charge |
-| CHECK#013 | CAD pending order shows Stripe instead of PayPal | Admin data incorrect |
-| CHECK#015 | CAD PayPal WS payment shows USD in admin | Currency mismatch |
+| CHECK#006 | Report+Sticker upsell missing from Register API payload | Product not delivered to customer |
+| CHECK#007 | "Pay with PayPal" missing on PayPal tab for VHR | Blocks payment completion |
+| CHECK#010 | Duplicate Stripe payment intents from homepage coupon | Risk of double charge |
+| CHECK#013 | CAD pending order shows Stripe instead of PayPal as gateway | Admin data incorrect |
+| CHECK#015 | CAD PayPal Window Sticker payment shows USD in admin | Currency mismatch |
+
+> ⚠️ **Release not recommended** until all P1 issues above are resolved.
 
 ---
 
-## 🛠️ Tools Used
+## 🛠️ Tools & Stack
 
 | Tool | Purpose |
 |------|---------|
-| [Jam.dev](https://jam.dev) | Bug recording with screen capture and console logs |
-| Stripe Dashboard (Test Mode) | Payment intent and 3DS verification |
+| [Jam.dev](https://jam.dev) | Bug recording with screen capture + console logs |
+| Stripe Dashboard (Test Mode) | Payment intent & 3DS verification |
 | PayPal Sandbox | PayPal flow testing |
-| Browser DevTools | Network tab for API payload inspection |
+| Browser DevTools | Network tab — API payload inspection |
 | Admin Panel | Order status, currency, gateway verification |
 
 ---
 
-## 🗂️ Folder Structure
+## 🗂️ Repo Structure
 
 ```
 checkout-qa-portfolio/
-├── BUG_REPORT.md       # Detailed bug report with R1/R2 comparison
-├── TEST_PLAN.md        # Test strategy, scope, and risk assessment
-├── TEST_CASES.md       # 47 test cases across 10 modules
-├── QA_REPORT.md        # Final QA report and release recommendation
-└── README.md           # This file
+├── README.md         ← You are here
+├── BUG_REPORT.md     ← Bug tracker with R1/R2 comparison
+├── TEST_PLAN.md      ← Strategy, scope, risks
+├── TEST_CASES.md     ← 112 test cases across 14 modules
+└── QA_REPORT.md      ← Final report + release recommendation
 ```
 
 ---
 
-## 👤 About
-
-This portfolio demonstrates end-to-end QA work on a production-grade checkout system including:
-- Multi-gateway payment testing
-- API payload verification
-- 3D Secure and authentication challenge testing
-- Regression testing across multiple rounds
-- Structured documentation for team and stakeholder communication
-
----
-
-*QA Engineer: Shahnawaz | Testing Period: May 2025*
+<div align="center">
+<sub>QA Engineer: Shahnawaz &nbsp;·&nbsp; Testing Period: May 2025</sub>
+</div>
