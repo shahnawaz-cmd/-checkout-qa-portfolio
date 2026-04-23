@@ -150,4 +150,30 @@ No regressions were observed. All previously passing items remained stable.
 
 ---
 
-*This report was generated from QA testing data collected across R1 and R2 CSV exports and Sheet1 (3DS/CAPTCHA/Mobile flows).*
+## 10. Production Bug — V2-4448 (PayPal Checkout Updates)
+
+**Ticket:** V2-4448 | **Priority:** High | **Status:** ✅ Done
+**Resolved:** 19 March 2025 | **Evidence:** [jam.dev/c/32b81a28](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3)
+
+### Issues Fixed in Production
+
+| # | Issue | Status |
+|---|-------|--------|
+| 1 | PayPal double charge — customer could re-pay by navigating back instead of clicking "Return to Merchant" | ✅ Fixed |
+| 2 | Stripe visible for CAD customers — must be hidden | ✅ Fixed |
+| 3 | Checkout page fails to load when only PayPal set in site settings | ✅ Fixed |
+
+### QA Cycle: DEV → PRODUCTION
+
+| Round | Date | Result |
+|-------|------|--------|
+| DEV CIT #1 | 14 Feb 2025 | ❌ FAILED |
+| DEV CIT #2–4 | 17–21 Feb 2025 | ❌ FAILED |
+| DEV CIT #5 | 22 Feb 2025 | ✅ PASSED |
+| PRODUCTION CIT | 19 Mar 2025 | ✅ PASSED |
+
+All 10 test cases for V2-4448 passed. No regressions observed on existing checkout flows.
+
+---
+
+*This report was generated from QA testing data collected across R1, R2, Sheet1 (3DS/CAPTCHA/Mobile flows), and V2-4448 production export.*

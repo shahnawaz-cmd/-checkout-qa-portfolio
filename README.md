@@ -63,7 +63,7 @@ Gateway visibility is determined by the customer's IP region:
 
 | Total | Passed | Failed | Pending |
 |-------|--------|--------|---------|
-| 112 | 25 | 11 | 79 |
+| 122 | 35 | 11 | 79 |
 
 ### 🔐 3DS / Challenge Flows
 

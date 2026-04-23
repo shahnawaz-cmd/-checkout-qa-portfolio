@@ -260,6 +260,25 @@
 
 ---
 
+## Module 15 — V2-4448: PayPal Production Bug Fixes
+
+> Issues found in production after deployment. All fixed and verified via PRODUCTION CIT on 19 Mar 2025.
+
+| TC ID | Title | Environment | Steps | Expected Result | Evidence | Status |
+|-------|-------|-------------|-------|----------------|----------|--------|
+| TC-V2-001 | PayPal double charge prevented — back navigation blocked | PRODUCTION | 1. Complete PayPal payment 2. Navigate back to PayPal page instead of clicking "Return to Merchant" | System prevents second charge; only one order created; user redirected away from PayPal page | [jam.dev](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3) | ✅ PASSED |
+| TC-V2-002 | Only one order created for PayPal payment regardless of back navigation | PRODUCTION | 1. Complete PayPal payment 2. Attempt to re-pay via back navigation | Admin shows exactly one order for the transaction | [jam.dev](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3) | ✅ PASSED |
+| TC-V2-003 | Stripe hidden for CAD customers | CWA / CD | 1. Open checkout as CAD customer | Stripe tab not visible; only PayPal shown | [jam.dev](https://jam.dev/c/c2d2c5fe-dfaf-4d69-9a77-08627d11dc34) | ✅ PASSED |
+| TC-V2-004 | Checkout page loads when only PayPal set in site settings | CWA | 1. Set site settings to PayPal-only gateway 2. Open checkout | Checkout page loads correctly; no blank/error page | — | ✅ PASSED |
+| TC-V2-005 | Stripe payment working in CD after fix | CD | 1. Complete Stripe payment in CD | Payment succeeds; order created | [jam.dev](https://jam.dev/c/21217c25-a37d-445c-8c76-174e6a8f82f1) | ✅ PASSED |
+| TC-V2-006 | PayPal payment working in CD after fix | CD | 1. Complete PayPal payment in CD | Payment succeeds; order created | [jam.dev](https://jam.dev/c/7234d8d1-f4e4-4d1c-afe7-9b94887216da) | ✅ PASSED |
+| TC-V2-007 | Stripe payment working in CWA after fix | CWA | 1. Complete Stripe payment in CWA | Payment succeeds; order created | [jam.dev](https://jam.dev/c/867e76f0-68de-4e41-9a37-9875753088a8) | ✅ PASSED |
+| TC-V2-008 | PayPal payment working in CWA after fix | CWA | 1. Complete PayPal payment in CWA | Payment succeeds; order created | [jam.dev](https://jam.dev/c/2c4dea50-db01-4d97-9c26-b3d8d4fc29c7) | ✅ PASSED |
+| TC-V2-009 | NGN region shows Stripe + Paystack only | CWA | 1. Open checkout as NGN customer | Stripe and Paystack visible; PayPal hidden | [jam.dev](https://jam.dev/c/c06919ea-2cef-4db0-b0f2-173377e70b41) | ✅ PASSED |
+| TC-V2-010 | PayPal CAD discount applied correctly | CWA | 1. Apply coupon as CAD customer 2. Pay via PayPal | Discounted price charged via PayPal in CAD | [jam.dev](https://jam.dev/c/c2d2c5fe-dfaf-4d69-9a77-08627d11dc34) | ✅ PASSED |
+
+---
+
 ## Updated Test Execution Summary
 
 | Module | Total TCs | Passed | Failed | Open/Not Tested |
@@ -274,8 +293,9 @@
 | 3DS Challenges | 6 | 2 | 2 | 2 |
 | CAPTCHA / PIN | 3 | 2 | 0 | 1 |
 | Mobile 3DS | 7 | 7 | 0 | 0 |
-| **Multi-IP Handling** | **10** | **—** | **—** | **10** |
-| **Stripe Currency (0/2-decimal + conversion)** | **13** | **—** | **—** | **13** |
-| **Coupon: Prev vs New (Cookie/Session/Edge)** | **18** | **—** | **—** | **18** |
-| **UI/UX + Cross-Browser** | **24** | **—** | **—** | **24** |
-| **Total** | **112** | **25** | **11** | **79** |
+| Multi-IP Handling | 10 | — | — | 10 |
+| Stripe Currency (0/2-decimal + conversion) | 13 | — | — | 13 |
+| Coupon: Prev vs New (Cookie/Session/Edge) | 18 | — | — | 18 |
+| UI/UX + Cross-Browser | 24 | — | — | 24 |
+| **V2-4448: PayPal Production Fixes** | **10** | **10** | **0** | **0** |
+| **Total** | **122** | **35** | **11** | **79** |

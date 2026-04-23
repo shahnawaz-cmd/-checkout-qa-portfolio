@@ -69,6 +69,7 @@ Validate the end-to-end checkout experience for the CWA Next.js checkout page, c
 | 15 | Coupon: Prev vs New, Cookie & Session Verification | P1 | TC-CPN-005–022 |
 | 16 | UI/UX Validation | P2 | TC-UX-001–012 |
 | 17 | Cross-Browser Compatibility | P2 | TC-CB-001–012 |
+| 18 | V2-4448 — PayPal Production Bug Fixes | P1 | TC-V2-001–010 |
 
 ---
 

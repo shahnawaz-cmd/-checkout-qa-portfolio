@@ -226,4 +226,80 @@
 
 ---
 
-*Generated from CSV data: R1 28_5_2025, R2 29_5_2025, Sheet1*
+---
+
+## Production Bug Report — V2-4448 (PayPal Checkout Updates)
+
+**Jira Ticket:** V2-4448
+**Title:** CWA & CD PayPal Checkout Updates
+**Type:** Story
+**Priority:** High
+**Reporter:** Zain Khan
+**Assignee:** Sebghatullah Yusuf Wakily
+**QA:** Muhammad Shahnawaz
+**Created:** 11 Feb 2025
+**Resolved:** 19 Mar 2025
+**Final Status:** ✅ Done — PRODUCTION CIT PASSED
+**Sprint:** V2 Sprint 83 → V2 Sprint 84
+**Evidence:** [https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3)
+
+---
+
+### Issues Reported
+
+| # | Issue | Environment | Final Status |
+|---|-------|-------------|-------------|
+| 1 | PayPal double charge — customer can pay again by navigating back instead of clicking "Return to Merchant"; system only records first order | PRODUCTION | ✅ Fixed |
+| 2 | Stripe shown for CAD customers — must be hidden since CAD payments should not go to Stripe account | CWA / CD | ✅ Fixed |
+| 3 | Checkout page fails to load when only PayPal is set as payment gateway in site settings | CWA | ✅ Fixed |
+
+---
+
+### Issue Details
+
+#### Issue 1 — PayPal Double Charge (Production)
+- **Description:** On checkout, customers using PayPal can be charged twice. After completing payment, if they navigate back to the PayPal payment page instead of clicking "Return to Merchant", PayPal processes a second charge. The system only creates one order (for the first payment), so the customer is double-charged with only one order record.
+- **Similar fix:** Previously resolved for Stripe; same fix pattern applied to PayPal across CWA and CD.
+- **Evidence:** [jam.dev recording](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3)
+- **Final Status:** ✅ Fixed — PRODUCTION CIT PASSED (19 Mar 2025)
+
+#### Issue 2 — Stripe Visible for CAD Customers
+- **Description:** CAD customers were seeing Stripe as a payment option. Since CAD payments must not be processed through the Stripe account, Stripe must be hidden for all CAD/Canadian customers.
+- **Final Status:** ✅ Fixed
+
+#### Issue 3 — Checkout Page Doesn't Load with PayPal-Only Gateway Setting
+- **Description:** When site settings are configured to show only PayPal as the payment gateway, the checkout page fails to load entirely.
+- **Final Status:** ✅ Fixed
+
+---
+
+### QA Cycle Summary
+
+| Round | Date | QA Result | Notes |
+|-------|------|-----------|-------|
+| DEV CIT #1 | 14 Feb 2025 | ❌ FAILED | Duplicate Stripe entries found (discount + full price); email missing from discounted entry |
+| DEV CIT #2 | 17 Feb 2025 | ❌ FAILED | Sent back for further fixes |
+| DEV CIT #3 | 20 Feb 2025 | ❌ FAILED | Additional issues found |
+| DEV CIT #4 | 21 Feb 2025 | ❌ FAILED | V1 issues fixed; new Stripe-related issue found |
+| DEV CIT #5 | 22 Feb 2025 | ✅ PASSED | All DEV issues resolved |
+| PRODUCTION CIT | 19 Mar 2025 | ✅ PASSED | Full production verification passed |
+
+---
+
+### Additional Evidence from QA Cycle
+
+| Description | Link |
+|-------------|------|
+| V1 related issues fixed | [jam.dev](https://jam.dev/c/79d7d5e6-5363-46c9-8c3d-915240523d73) |
+| Stripe-related issue found | [jam.dev](https://jam.dev/c/0bfe01e3-132c-4ad6-88fb-85bd3417df21) |
+| NGN shows Stripe + Paystack only | [jam.dev](https://jam.dev/c/c06919ea-2cef-4db0-b0f2-173377e70b41) |
+| PayPal CAD discount working | [jam.dev](https://jam.dev/c/c2d2c5fe-dfaf-4d69-9a77-08627d11dc34) |
+| Stripe payment working in CD | [jam.dev](https://jam.dev/c/21217c25-a37d-445c-8c76-174e6a8f82f1) |
+| PayPal payment working in CD | [jam.dev](https://jam.dev/c/7234d8d1-f4e4-4d1c-afe7-9b94887216da) |
+| Stripe payment working in CWA | [jam.dev](https://jam.dev/c/867e76f0-68de-4e41-9a37-9875753088a8) |
+| PayPal payment working in CWA | [jam.dev](https://jam.dev/c/2c4dea50-db01-4d97-9c26-b3d8d4fc29c7) |
+| Production evidence | [jam.dev](https://jam.dev/c/32b81a28-7ef9-4ed0-97d0-a512a04e27f3) |
+
+---
+
+*Generated from CSV data: R1 28_5_2025, R2 29_5_2025, Sheet1, V2-4448_Export_23-04-2026*
